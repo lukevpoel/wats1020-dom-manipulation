@@ -24,19 +24,42 @@ $( document ).ready(function() {
     //          a base requirement.)
 
 
-    // TODO: Create a function to listen for clicks on all the "View Details"
+
+
+    // Create a function to listen for clicks on all the "View Details"
     // buttons so that when a user clicks a "View Details" button they see
     // the content contained in the elements with the class "details" in the
     // proper part of the screen.
     //      1. When user clicks a "view details" button, find the parent of that element.
-    //      2. Within that parent, find all the elements that have the class `details`.
-    //      3. Toggle visibility of all the elements within that parent with the class `details`.
-    //      4. Change the text of the "view details" button to read "hide details" so the user
-    //          understands they can hide the text again.
+    $('.view-details').on('click', function(event){
+        console.log(event);
+        var targetElement = event.target;
+        var container = targetElement.parentElement.parentElement;
+        //      2. Within that parent, find all the elements that have the class `details`.
+        $(container).find('.details').each(function(index, el){
+          //      3. Toggle visibility of all the elements within that parent with the class `details`.
+            if ($(el).is(':visible')){
+                $(el).fadeOut();
+                targetElement.innerText = 'View Details'
+            }
+            //      4. Change the text of the "view details" button to read "hide details" so the user
+            //          understands they can hide the text again.
+            else {
+                $(el).fadeIn();
+                targetElement.innerText = 'Hide Details'
+            }
+        });
+    });
 
-    // TODO: Create a function that listens for clicks on the voting buttons and
+    $('.btn.vote').on('click', function(event){
+      console.log(event);
+      var targetElement = event.target;
+      
+    })
+    // Create a function that listens for clicks on the voting buttons and
     // looks at the `data-vote` attribute on each button to see what was voted for,
     // then determines the updated vote breakdown to adjust the progress bars.
+
     //      1. Set up an event listener on the buttons with the `vote` class.
     //      2. When a button is clicked, look at the `data-vote` attribute to determine
     //          what the user is voting for ("great" or "greatest").
